@@ -1201,11 +1201,13 @@ function initContactForm(formEl) {
     e.preventDefault();
     setState('sending');
     try {
-      const data = new FormData(formEl);
+      const formData = new FormData(formEl);
+      const data = {};
+      formData.forEach((v, k) => data[k] = v);
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
+        body: JSON.stringify(data),
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
       });
       if (res.ok) {
         setState('success');
