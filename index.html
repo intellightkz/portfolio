@@ -1204,23 +1204,16 @@ function initContactForm(formEl) {
       const formData = new FormData(formEl);
       const data = {};
       formData.forEach((v, k) => data[k] = v);
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
       });
-      const json = await res.json().catch(() => ({}));
-      if (res.ok || json.ok) {
-        setState('success');
-        setTimeout(() => { setState('idle'); formEl.reset(); }, 3000);
-      } else {
-        setState('error');
-        setTimeout(() => setState('idle'), 3000);
-      }
-    } catch {
-      // Network error — submission may still have gone through
       setState('success');
       setTimeout(() => { setState('idle'); formEl.reset(); }, 3000);
+    } catch {
+      setState('error');
+      setTimeout(() => setState('idle'), 3000);
     }
   });
 }
