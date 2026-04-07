@@ -460,25 +460,14 @@
 
   .about-img-inner {
     width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 0.5rem;
   }
 
-  .about-initials {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 5rem;
-    color: var(--accent);
-    font-style: italic;
-    line-height: 1;
-  }
-
-  .about-name-tag {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
+  .about-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
   }
 
   .about-badge {
@@ -767,7 +756,8 @@
     .hero-right { grid-column: 1; grid-row: 2; height: 60vw; min-height: 280px; }
     .hero-stats { grid-column: 1; grid-row: 3; border-top: 1px solid var(--border); }
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .about-visual { display: none; }
+    .about-visual { display: block; max-width: 280px; margin: 0 auto; }
+    .about-img-wrap { aspect-ratio: 3/4; }
     .video-card { width: clamp(200px, 44vw, 280px); }
   }
 
@@ -1006,8 +996,7 @@
     <div class="about-visual">
       <div class="about-img-wrap">
         <div class="about-img-inner">
-          <div class="about-initials">NM</div>
-          <div class="about-name-tag">NurdaMotion</div>
+          <img src="MAN11.png" alt="Нурдаулет — Моушн-дизайнер" class="about-photo">
         </div>
       </div>
       <div class="about-badge">Моушн<br>дизайнер<br>2021 →</div>
