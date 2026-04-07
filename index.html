@@ -1264,31 +1264,33 @@ function initSmoothNav() {
    VIMEO THUMBNAILS + LIGHTBOX
    ═══════════════════════════════════ */
 
-async function loadVimeoThumbnails() {
-  const cards = document.querySelectorAll('.video-card[data-vimeo-id]');
-  await Promise.all(Array.from(cards).map(async card => {
+function loadVimeoThumbnails() {
+  const thumbs = {
+    '1180884280': 'https://i.vimeocdn.com/video/2143106891-65c6c9c355b5d67fcdb4bb227bb81f9baa3449d1e7264475f6cce82b8698ce79-d_640?region=us',
+    '1180885507': 'https://i.vimeocdn.com/video/2143108313-e98ca3b72c77b69fa06ff207840fcd850c220e48eb2372f0efadb677fd983db9-d_640?region=us',
+    '1180885357': 'https://i.vimeocdn.com/video/2143108101-c3ec164ba39b5ccb2623bf83592bb443a0759564fa3314c80ac87f589c0b03d9-d_640?region=us',
+    '1180885402': 'https://i.vimeocdn.com/video/2143108200-01af6b5d1e16876d478a9b0cffd675160a363ee919c9cad80b206a1dde8704ee-d_640?region=us',
+    '1180885446': 'https://i.vimeocdn.com/video/2143108251-1c5ec56ee9ed8582eba2bc2d2847e73d1a9e8412de27f97dc884c7d5bc078fee-d_640?region=us',
+    '1180885560': 'https://i.vimeocdn.com/video/2143108373-25c29348a566b25946d227e81d852aa7c615b131e736fbc30b7aa1a35850de1c-d_640?region=us',
+    '1180885600': 'https://i.vimeocdn.com/video/2143108420-070cdf6b52205de755bfbb2bbb39eb21e91bec4704f6d9ef27bcd949971f147d-d_640?region=us',
+    '1180885652': 'https://i.vimeocdn.com/video/2143108481-aeb99741879a16a7741292f71a2aa9ff919579fa792d98a10bb0239c367f52f6-d_640?region=us',
+    '1180885727': 'https://i.vimeocdn.com/video/2143108569-9b4b17fdc921308fb8ed7c319bfc6dc8598ca690f558b0092f919db9c1dd89bd-d_640?region=us',
+    '1180885760': 'https://i.vimeocdn.com/video/2143108603-ff4bc37457a3501677c3ba06bf686677ab52bb05501e30b4e165024e94cd09f5-d_640?region=us',
+    '1180885798': 'https://i.vimeocdn.com/video/2143108658-36cddf357e890443565f319d819a06b42befeccd54fb9dacdc725cd6605130a4-d_640?region=us',
+    '1180885831': 'https://i.vimeocdn.com/video/2143108722-ab447d6b5cdffbaf97641f8849aae3a4636c03160dfa6ce57dd49ab253078e75-d_640?region=us',
+    '1180885878': 'https://i.vimeocdn.com/video/2143108755-cb3a2da8cf7ae351aaf8fca3f8f21618d93facea2b1d7e354e6cb72bb5cbcf71-d_640?region=us',
+    '1180885917': 'https://i.vimeocdn.com/video/2143108803-9684a4674790ab175e0f6498d1697f8fd7ab5f3ffd02c7385d0554f2eebac876-d_640?region=us',
+  };
+  document.querySelectorAll('.video-card[data-vimeo-id]').forEach(card => {
     const id = card.dataset.vimeoId;
-    if (!id || id === 'YOUR_VIDEO_ID') return;
-    try {
-      const res = await fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${id}&width=640`);
-      if (!res.ok) return;
-      const data = await res.json();
-      // Inject thumbnail image
-      const img = document.createElement('img');
-      img.src = data.thumbnail_url;
-      img.alt = data.title || '';
-      img.className = 'vimeo-thumb';
-      img.loading = 'lazy';
-      const placeholder = card.querySelector('.video-placeholder');
-      placeholder.appendChild(img);
-      card.classList.add('has-thumb');
-      // Update title from Vimeo metadata if card title is still placeholder
-      const titleEl = card.querySelector('.video-card-title');
-      if (titleEl && titleEl.textContent.trim() === 'YOUR_VIDEO_ID') {
-        titleEl.textContent = data.title;
-      }
-    } catch { /* silently skip if fetch fails */ }
-  }));
+    if (!thumbs[id]) return;
+    const img = document.createElement('img');
+    img.src = thumbs[id];
+    img.className = 'vimeo-thumb';
+    img.loading = 'lazy';
+    card.querySelector('.video-placeholder').appendChild(img);
+    card.classList.add('has-thumb');
+  });
 }
 
 function initLightbox() {
