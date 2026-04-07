@@ -1284,12 +1284,11 @@ function loadVimeoThumbnails() {
   document.querySelectorAll('.video-card[data-vimeo-id]').forEach(card => {
     const id = card.dataset.vimeoId;
     if (!thumbs[id]) return;
-    const img = document.createElement('img');
-    img.src = thumbs[id];
-    img.className = 'vimeo-thumb';
-    img.loading = 'lazy';
-    card.querySelector('.video-placeholder').appendChild(img);
-    card.classList.add('has-thumb');
+    const el = card.querySelector('.video-placeholder');
+    el.style.backgroundImage = `url('${thumbs[id]}')`;
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = 'top center';
+    el.style.animation = 'none';
   });
 }
 
