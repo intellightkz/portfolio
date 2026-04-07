@@ -1285,6 +1285,7 @@ function loadVimeoThumbnails() {
     const id = card.dataset.vimeoId;
     if (!thumbs[id]) return;
     const el = card.querySelector('.video-placeholder');
+    el.style.background = 'none';
     el.style.backgroundImage = `url('${thumbs[id]}')`;
     el.style.backgroundSize = 'cover';
     el.style.backgroundPosition = 'top center';
