@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NurdaMotion — Моушн-дизайнер</title>
+<meta name="description" content="Моушн-дизайнер, специализирующийся на контенте для социальных сетей и брендовой анимации. Открыт к проектам.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Golos+Text:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F6F5F1;
+    --bg2: #EEEDE9;
+    --text: #0D0C0A;
+    --muted: #888880;
+    --accent: #C4B99A;
+    --accent-dark: #8B7D5E;
+    --border: rgba(13,12,10,0.1);
+    --white: #FFFFFF;
+    --card-bg: #FFFFFF;
+    --radius: 4px;
+    --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --pad-x: clamp(1.5rem, 5vw, 4rem);
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Golos Text', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 var(--pad-x);
+    height: 64px;
+    background: rgba(246,245,241,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--white) !important;
+    background: var(--text);
+    padding: 0.5rem 1.2rem;
+    border-radius: var(--radius);
+    transition: background var(--transition);
+  }
+
+  .nav-cta:hover { background: var(--accent-dark) !important; color: var(--white) !important; }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: 0.3s; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    align-items: stretch;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    grid-column: 1; grid-row: 1;
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: calc(64px + 4rem) var(--pad-x) 2rem;
+  }
+
+  .hero-stats {
+    grid-column: 1; grid-row: 2;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border);
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+    opacity: 0; transform: translateY(10px);
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+
+  .hero-right {
+    grid-column: 2; grid-row: 1 / 3;
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%; left: -8%;
+    width: 32vw; height: 32vw;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    pointer-events: none; z-index: 0;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 2rem;
+    opacity: 0; transform: translateY(12px);
+    animation: fadeUp 0.7s 0.1s forwards;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    opacity: 0; transform: translateY(16px);
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title em { font-style: italic; color: var(--accent-dark); }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 38ch;
+    margin-bottom: 2.5rem;
+    opacity: 0; transform: translateY(12px);
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  .hero-actions {
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; transform: translateY(12px);
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--white);
+    background: var(--text);
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius);
+    transition: background var(--transition), transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--text); border-color: var(--text); }
+  .btn-ghost svg { width: 14px; height: 14px; }
+
+  .hero-reel {
+    position: relative;
+    flex: 1;
+    min-height: 100%;
+    overflow: hidden;
+    background: var(--text);
+    cursor: pointer;
+  }
+
+  .hero-reel-bg {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #1a1f2e 0%, #0d1117 100%);
+    position: absolute; inset: 0;
+  }
+
+  .stat {
+    background: var(--white);
+    padding: 1rem 1.25rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: block;
+    color: var(--text);
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 0;
+    background: var(--bg);
+  }
+
+  .marquee-track {
+    display: flex; gap: 3rem;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+
+  .marquee-item {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 3rem;
+  }
+
+  .marquee-item::after { content: '·'; color: var(--accent); font-size: 1.2rem; }
+
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* ── SECTION COMMON ── */
+  section { padding: clamp(4rem, 8vw, 8rem) var(--pad-x); }
+
+  .section-tag {
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--accent); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+
+  /* ── PORTFOLIO SLIDER ── */
+  #work { background: var(--bg); padding-left: 0; padding-right: 0; padding-bottom: 0; }
+
+  .slider-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 0 var(--pad-x);
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  .slider-controls { display: flex; align-items: center; gap: 1rem; }
+
+  .slider-counter {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.06em; color: var(--muted); min-width: 52px;
+  }
+  .slider-counter span { color: var(--text); }
+
+  .slider-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .slider-btn:hover { background: var(--text); border-color: var(--text); }
+  .slider-btn:hover svg { stroke: white; }
+  .slider-btn:active { transform: scale(0.93); }
+  .slider-btn svg { width: 16px; height: 16px; stroke: var(--text); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s; }
+  .slider-btn.disabled { opacity: 0.3; pointer-events: none; }
+
+  .slider-progress { width: 120px; height: 1.5px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .slider-progress-fill { height: 100%; background: var(--text); border-radius: 2px; transition: width 0.35s ease; }
+
+  .slider-viewport {
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    cursor: grab;
+    width: 100%;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .slider-viewport::-webkit-scrollbar { display: none; }
+  .slider-viewport.dragging { cursor: grabbing; }
+
+  .slider-track {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0 var(--pad-x);
+    width: max-content;
+  }
+
+  .video-card {
+    flex-shrink: 0;
+    width: clamp(220px, 28vw, 340px);
+    aspect-ratio: 9 / 16;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: var(--text);
+    scroll-snap-align: start;
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .video-card:hover { box-shadow: 0 20px 48px rgba(0,0,0,0.18); transform: translateY(-4px); }
+
+  .video-card-inner { position: absolute; inset: 0; overflow: hidden; }
+
+  .video-card-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s;
+  }
+
+  .video-card:hover .video-card-overlay { background: rgba(0,0,0,0.28); }
+
+  .play-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.8);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: scale(0.85);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .video-card:hover .play-btn { opacity: 1; transform: scale(1); }
+
+  .play-btn svg { width: 14px; height: 14px; fill: white; margin-left: 2px; }
+
+  .video-card-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 2rem 1rem 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    transform: translateY(4px); opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+
+  .video-card:hover .video-card-info { opacity: 1; transform: translateY(0); }
+
+  .video-card-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+  }
+
+  .video-card-tag {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .thumb-svg {
+    width: 100%; height: 100%; position: absolute; inset: 0;
+    opacity: 0.18;
+  }
+
+  .video-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+
+  .video-card:hover .video-placeholder { transform: scale(1.04); }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-visual { position: relative; }
+
+  .about-img-wrap {
+    aspect-ratio: 3/4;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg2);
+    position: relative;
+  }
+
+  .about-img-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 0.5rem;
+  }
+
+  .about-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: var(--accent);
+    font-style: italic;
+    line-height: 1;
+  }
+
+  .about-name-tag {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .about-badge {
+    position: absolute;
+    bottom: -1.5rem; right: -1.5rem;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .about-text .section-tag { margin-bottom: 0.5rem; }
+
+  .about-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin: 1.5rem 0 2rem;
+  }
+
+  .about-body strong { color: var(--text); font-weight: 500; }
+
+  .skills-grid {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .skill-tag {
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--accent-dark);
+    background: rgba(196,185,154,0.15);
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+    border: 1px solid rgba(196,185,154,0.3);
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bg); }
+
+  .contact-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-wrap .section-tag { justify-content: center; margin-bottom: 0.75rem; }
+  .contact-wrap .section-tag::before { display: none; }
+
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+
+  .contact-title em { font-style: italic; color: var(--accent-dark); }
+
+  .contact-sub {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-form {
+    display: flex; flex-direction: column; gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+  .form-input {
+    width: 100%;
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.8rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+
+  .form-input::placeholder { color: var(--muted); }
+  .form-input:focus { border-color: var(--accent); }
+
+  .form-submit {
+    width: 100%;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--text);
+    border: none;
+    border-radius: var(--radius);
+    padding: 1rem;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+
+  .form-submit:hover { background: var(--accent-dark); }
+
+  .contact-alt {
+    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-alt-text { font-size: 0.82rem; color: var(--muted); }
+
+  .contact-link {
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+    display: flex; align-items: center; gap: 0.3rem;
+  }
+
+  .contact-link:hover { border-color: var(--text); }
+  .contact-link svg { width: 12px; height: 12px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem var(--pad-x);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .footer-copy { font-size: 0.75rem; color: var(--muted); }
+
+  .footer-socials { display: flex; gap: 1.25rem; }
+
+  .social-link {
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .social-link:hover { color: var(--text); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.will-animate { opacity: 0; transform: translateY(24px); }
+  .reveal.will-animate.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto; min-height: auto; }
+    .hero-left { grid-column: 1; grid-row: 1; padding: calc(64px + 2rem) clamp(1.5rem,5vw,3rem) 2rem; }
+    .hero-right { grid-column: 1; grid-row: 2; height: 60vw; min-height: 280px; }
+    .hero-stats { grid-column: 1; grid-row: 3; border-top: 1px solid var(--border); }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-visual { display: none; }
+    .video-card { width: clamp(200px, 44vw, 280px); }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 64px; left: 0; right: 0;
+      flex-direction: column;
+      background: rgba(246,245,241,0.96);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem var(--pad-x);
+      gap: 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+    .hero-right { height: 80vw; }
+    .video-card { width: calc(100vw - 3rem); scroll-snap-align: start; }
+    .slider-track { padding: 0 1.5rem; gap: 0.75rem; }
+    .hero::before { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">NurdaMotion</a>
+  <ul class="nav-links">
+    <li><a href="#work">Работы</a></li>
+    <li><a href="#about">Обо мне</a></li>
+    <li><a href="#contact">Контакт</a></li>
+    <li><a href="#contact" class="nav-cta">Поговорим</a></li>
+  </ul>
+  <div class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Моушн-дизайнер · Открыт к проектам</div>
+    <h1 class="hero-title">Движение,<br>которое <em>цепляет.</em></h1>
+    <p class="hero-desc">
+      Моушн-дизайн для брендов, которые хотят остановить скролл. Специализация — короткий формат, полный цикл: от брифа до финального рендера.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        Написать
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#" class="btn-ghost" download>
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 2v8M5 7l3 3 3-3M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Скачать резюме
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">3+</span><span class="stat-label">Лет опыта</span></div>
+    <div class="stat"><span class="stat-num">40+</span><span class="stat-label">Проектов</span></div>
+    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Идей</span></div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-reel">
+      <div class="hero-reel-bg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">After Effects</div>
+    <div class="marquee-item">Photoshop</div>
+    <div class="marquee-item">Illustrator</div>
+    <div class="marquee-item">Figma</div>
+    <div class="marquee-item">DaVinci Resolve</div>
+    <div class="marquee-item">Premiere Pro</div>
+    <div class="marquee-item">Анимация для соцсетей</div>
+    <div class="marquee-item">Брендовая анимация</div>
+    <div class="marquee-item">Creative Designer</div>
+    <div class="marquee-item">After Effects</div>
+    <div class="marquee-item">Photoshop</div>
+    <div class="marquee-item">Illustrator</div>
+    <div class="marquee-item">Figma</div>
+    <div class="marquee-item">DaVinci Resolve</div>
+    <div class="marquee-item">Premiere Pro</div>
+    <div class="marquee-item">Анимация для соцсетей</div>
+    <div class="marquee-item">Брендовая анимация</div>
+    <div class="marquee-item">Creative Designer</div>
+  </div>
+</div>
+
+<!-- PORTFOLIO SLIDER -->
+<section id="work">
+  <div class="slider-header">
+    <div>
+      <div class="section-tag reveal">Избранные работы</div>
+      <h2 class="section-title reveal">Портфолио</h2>
+    </div>
+    <div class="slider-controls">
+      <div class="slider-progress"><div class="slider-progress-fill" id="sliderFill"></div></div>
+      <div class="slider-counter"><span id="sliderCurrent">01</span> / <span id="sliderTotal">14</span></div>
+      <button class="slider-btn disabled" id="btnPrev" aria-label="Previous">
+        <svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg>
+      </button>
+      <button class="slider-btn" id="btnNext" aria-label="Next">
+        <svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="slider-viewport" id="sliderViewport">
+    <div class="slider-track" id="sliderTrack">
+
+    <div class="video-card" style="transition-delay:0s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(135deg,#1a1816,#2e2a22)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><circle cx="45" cy="80" r="55" fill="none" stroke="white" stroke-width="0.4"/><circle cx="45" cy="80" r="30" fill="none" stroke="white" stroke-width="0.4"/><line x1="0" y1="80" x2="90" y2="80" stroke="white" stroke-width="0.4"/><line x1="45" y1="0" x2="45" y2="160" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Pulse — Анимация фирменного стиля</div><div class="video-card-tag">Бренд · 2024</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.06s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(135deg,#141e2a,#1e2e3d)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><rect x="10" y="20" width="70" height="120" fill="none" stroke="white" stroke-width="0.4"/><rect x="20" y="40" width="50" height="80" fill="none" stroke="white" stroke-width="0.4"/><line x1="45" y1="20" x2="45" y2="140" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Рилс для запуска продукта</div><div class="video-card-tag">Соцсети · TikTok</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.12s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(135deg,#1e1414,#2e1e1e)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><polygon points="45,10 85,150 5,150" fill="none" stroke="white" stroke-width="0.4"/><polygon points="45,40 72,130 18,130" fill="none" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Кинетическая типографика</div><div class="video-card-tag">Типографика · Instagram</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.18s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(135deg,#161a14,#20261a)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><circle cx="22" cy="80" r="18" fill="none" stroke="white" stroke-width="0.4"/><circle cx="45" cy="80" r="18" fill="none" stroke="white" stroke-width="0.4"/><circle cx="68" cy="80" r="18" fill="none" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Лупированные элементы бренда</div><div class="video-card-tag">Бренд · Луп</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.24s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(135deg,#1a1420,#261e30)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><line x1="0" y1="0" x2="90" y2="160" stroke="white" stroke-width="0.4"/><line x1="90" y1="0" x2="0" y2="160" stroke="white" stroke-width="0.4"/><rect x="30" y="60" width="30" height="40" fill="none" stroke="white" stroke-width="0.4" transform="rotate(45 45 80)"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Переходы в интерфейсе приложения</div><div class="video-card-tag">UI Моушн · Product</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.3s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(135deg,#1a1410,#2e2218)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><circle cx="45" cy="80" r="55" fill="none" stroke="white" stroke-width="0.4" stroke-dasharray="3 6"/><circle cx="45" cy="80" r="35" fill="none" stroke="white" stroke-width="0.4" stroke-dasharray="3 6"/><circle cx="45" cy="80" r="15" fill="none" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Кампания Spotify — пак рилсов</div><div class="video-card-tag">Соцсети · Кампания</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.36s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(160deg,#0e1a1e,#162630)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><path d="M0 80 Q22 40 45 80 Q68 120 90 80" fill="none" stroke="white" stroke-width="0.4"/><path d="M0 80 Q22 120 45 80 Q68 40 90 80" fill="none" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Визуализатор звуковых волн</div><div class="video-card-tag">Музыка · Визуализатор</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.42s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(160deg,#1e100a,#2e1a0e)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><rect x="8" y="8" width="74" height="144" rx="4" fill="none" stroke="white" stroke-width="0.4"/><rect x="18" y="20" width="54" height="120" rx="2" fill="none" stroke="white" stroke-width="0.4"/><line x1="45" y1="8" x2="45" y2="152" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Промо-серия для e-commerce</div><div class="video-card-tag">Соцсети · Коммерция</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.48s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(160deg,#0a0e1a,#10162e)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><circle cx="45" cy="80" r="40" fill="none" stroke="white" stroke-width="0.4"/><line x1="45" y1="40" x2="45" y2="120" stroke="white" stroke-width="0.4"/><line x1="5" y1="80" x2="85" y2="80" stroke="white" stroke-width="0.4"/><ellipse cx="45" cy="80" rx="40" ry="15" fill="none" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">3D-ревил логотипа</div><div class="video-card-tag">3D · Брендинг</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.54s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(160deg,#101a10,#1a2a18)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><path d="M45 8 L85 152 L5 152 Z" fill="none" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Контент-пак для fashion-бренда</div><div class="video-card-tag">Соцсети · Мода</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.6s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(160deg,#1a0e14,#2a1020)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><rect x="10" y="30" width="70" height="100" fill="none" stroke="white" stroke-width="0.4" transform="rotate(10 45 80)"/><rect x="10" y="30" width="70" height="100" fill="none" stroke="white" stroke-width="0.4" transform="rotate(-10 45 80)"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Промо мероприятия — титульная анимация</div><div class="video-card-tag">Ивент · Трансляция</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.66s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(160deg,#1a1a10,#2a2a14)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><line x1="0" y1="40" x2="90" y2="40" stroke="white" stroke-width="0.4"/><line x1="0" y1="80" x2="90" y2="80" stroke="white" stroke-width="0.4"/><line x1="0" y1="120" x2="90" y2="120" stroke="white" stroke-width="0.4"/><line x1="30" y1="0" x2="30" y2="160" stroke="white" stroke-width="0.4"/><line x1="60" y1="0" x2="60" y2="160" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Пак интро для YouTube</div><div class="video-card-tag">YouTube · Соцсети</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.72s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(160deg,#0e1a14,#162a1e)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><circle cx="22" cy="40" r="18" fill="none" stroke="white" stroke-width="0.4"/><circle cx="68" cy="40" r="18" fill="none" stroke="white" stroke-width="0.4"/><circle cx="22" cy="120" r="18" fill="none" stroke="white" stroke-width="0.4"/><circle cx="68" cy="120" r="18" fill="none" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Запуск стартапа — промо-фильм</div><div class="video-card-tag">Бренд · Запуск</div></div>
+      </div>
+    </div>
+
+    <div class="video-card" style="transition-delay:0.78s">
+      <div class="video-card-inner">
+        <div class="video-placeholder" style="background:linear-gradient(160deg,#1a100e,#2a1814)"><svg class="thumb-svg" viewBox="0 0 90 160" preserveAspectRatio="xMidYMid slice"><ellipse cx="45" cy="80" rx="42" ry="60" fill="none" stroke="white" stroke-width="0.4"/><ellipse cx="45" cy="80" rx="28" ry="40" fill="none" stroke="white" stroke-width="0.4"/><ellipse cx="45" cy="80" rx="12" ry="18" fill="none" stroke="white" stroke-width="0.4"/></svg></div>
+        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
+        <div class="video-card-info"><div class="video-card-title">Анимации превью для App Store</div><div class="video-card-tag">Продукт · UI</div></div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="about-img-wrap">
+        <div class="about-img-inner">
+          <div class="about-initials">NM</div>
+          <div class="about-name-tag">NurdaMotion</div>
+        </div>
+      </div>
+      <div class="about-badge">Моушн<br>дизайнер<br>2021 →</div>
+    </div>
+
+    <div class="about-text">
+      <div class="section-tag reveal">Обо мне</div>
+      <h2 class="section-title reveal">Моушн с<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--accent-dark)">намерением.</em></h2>
+      <p class="about-body reveal">
+        Я моушн-дизайнер с сильной базой в <strong>контенте для социальных сетей</strong> — том самом, который останавливает скролл. Будь то 6-секундный бампер или полноценная система брендовой анимации — в каждый кадр я вкладываю одинаковую <strong>одержимость качеством</strong>.
+        <br><br>
+        Легко веду проект от брифа до сдачи. Открыт к штатным позициям и фриланс-проектам с амбициозными командами.
+      </p>
+      <div class="skills-grid reveal">
+        <span class="skill-tag">After Effects</span>
+        <span class="skill-tag">Photoshop</span>
+        <span class="skill-tag">Illustrator</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">DaVinci Resolve</span>
+        <span class="skill-tag">Premiere Pro</span>
+        <span class="skill-tag">Анимация для соцсетей</span>
+        <span class="skill-tag">Брендовая анимация</span>
+        <span class="skill-tag">Creative Designer</span>
+      </div>
+      <div class="reveal">
+        <a href="#contact" class="btn-primary">Начать разговор</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="section-tag">Контакт</div>
+    <h2 class="contact-title">Создадим что-то <em>крутое.</em></h2>
+    <p class="contact-sub">
+      Вы рекрутер крупной технологической компании или бренд с амбициозным брифом — напишите, буду рад.
+    </p>
+
+    <form class="contact-form" id="contactForm">
+      <div class="form-row">
+        <input type="text" class="form-input" placeholder="Ваше имя" required>
+        <input type="email" class="form-input" placeholder="Email-адрес" required>
+      </div>
+      <input type="text" class="form-input" placeholder="Компания / должность (необязательно)">
+      <textarea class="form-input" rows="5" placeholder="Расскажите о проекте или предложении..." required></textarea>
+      <button type="submit" class="form-submit">Отправить →</button>
+    </form>
+
+    <div class="contact-alt">
+      <span class="contact-alt-text">Или напишите напрямую</span>
+      <a href="mailto:hello@nurdamotion.com" class="contact-link">
+        hello@nurdamotion.com
+        <svg viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1v7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </a>
+      <a href="#" class="contact-link" download>
+        Скачать резюме
+        <svg viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 6l3 3 3-3M1 10h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">NurdaMotion</a>
+  <span class="footer-copy">© 2024 NurdaMotion. Все права защищены.</span>
+  <div class="footer-socials">
+    <a href="#" class="social-link">Instagram</a>
+    <a href="#" class="social-link">Behance</a>
+    <a href="#" class="social-link">LinkedIn</a>
+    <a href="#" class="social-link">Vimeo</a>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════
+   SLIDER CLASS — portable, testable
+   ═══════════════════════════════════ */
+
+class Slider {
+  constructor({ viewport, track, btnPrev, btnNext, fillEl, currentEl, totalEl }) {
+    this.viewport = viewport;
+    this.track = track;
+    this.btnPrev = btnPrev;
+    this.btnNext = btnNext;
+    this.fillEl = fillEl;
+    this.currentEl = currentEl;
+    this.step = 0;
+    this.dragging = false;
+    this.startX = 0;
+    this.startLeft = 0;
+
+    this.total = track.querySelectorAll('.video-card').length;
+    totalEl.textContent = String(this.total).padStart(2, '0');
+
+    this._bind();
+    requestAnimationFrame(() => { this._initStep(); this._updateUI(); });
+  }
+
+  _initStep() {
+    const first = this.track.querySelector('.video-card');
+    if (first) this.step = first.getBoundingClientRect().width + 12;
+  }
+
+  _currentIdx() {
+    return this.step > 0 ? Math.round(this.viewport.scrollLeft / this.step) : 0;
+  }
+
+  _smoothScroll(to, duration = 420) {
+    const from = this.viewport.scrollLeft;
+    const dist = to - from;
+    if (Math.abs(dist) < 1) return;
+    const t0 = performance.now();
+    const vp = this.viewport;
+    (function tick(now) {
+      const p = Math.min((now - t0) / duration, 1);
+      const ease = p < 0.5 ? 2*p*p : -1 + (4 - 2*p)*p;
+      vp.scrollLeft = from + dist * ease;
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  goTo(idx) {
+    idx = Math.max(0, Math.min(idx, this.total - 1));
+    this._smoothScroll(idx * this.step);
+  }
+
+  _updateUI() {
+    const max = this.viewport.scrollWidth - this.viewport.clientWidth;
+    const pct = max > 0 ? Math.min(100, (this.viewport.scrollLeft / max) * 100) : 0;
+    this.fillEl.style.width = pct + '%';
+    this.currentEl.textContent = String(this._currentIdx() + 1).padStart(2, '0');
+    this.btnPrev.classList.toggle('disabled', this.viewport.scrollLeft < 2);
+    this.btnNext.classList.toggle('disabled', this.viewport.scrollLeft >= max - 2);
+  }
+
+  _bind() {
+    this.btnPrev.addEventListener('click', () => this.goTo(this._currentIdx() - 1));
+    this.btnNext.addEventListener('click', () => this.goTo(this._currentIdx() + 1));
+    this.viewport.addEventListener('scroll', () => this._updateUI(), { passive: true });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  this.goTo(this._currentIdx() - 1);
+      if (e.key === 'ArrowRight') this.goTo(this._currentIdx() + 1);
+    });
+
+    // Drag
+    this.viewport.addEventListener('mousedown', e => {
+      this.dragging = true;
+      this.startX = e.pageX;
+      this.startLeft = this.viewport.scrollLeft;
+      this.viewport.classList.add('dragging');
+    });
+    window.addEventListener('mousemove', e => {
+      if (!this.dragging) return;
+      this.viewport.scrollLeft = this.startLeft - (e.pageX - this.startX);
+    });
+    window.addEventListener('mouseup', () => {
+      if (!this.dragging) return;
+      this.dragging = false;
+      this.viewport.classList.remove('dragging');
+      this.goTo(this._currentIdx());
+    });
+  }
+}
+
+
+/* ═══════════════════════════════════
+   FORM — state-machine approach
+   ═══════════════════════════════════ */
+
+function initContactForm(formEl) {
+  const btn = formEl.querySelector('.form-submit');
+  const STATES = { idle: 'Отправить →', sending: 'Отправка...', success: 'Отправлено ✓', error: 'Ошибка — попробуйте снова' };
+
+  function setState(state) {
+    btn.textContent = STATES[state];
+    btn.style.background = state === 'success' ? '#3d6b3a' : state === 'error' ? '#8b3a3a' : '';
+    btn.disabled = state === 'sending';
+  }
+
+  formEl.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    setState('sending');
+    // Simulate async submit — replace with real fetch() when backend is ready
+    await new Promise(r => setTimeout(r, 800));
+    setState('success');
+    setTimeout(() => { setState('idle'); formEl.reset(); }, 3000);
+  });
+}
+
+
+/* ═══════════════════════════════════
+   REVEAL OBSERVER
+   ═══════════════════════════════════ */
+
+function initReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.classList.add('will-animate');
+    obs.observe(el);
+  });
+}
+
+
+/* ═══════════════════════════════════
+   SMOOTH NAV SCROLL
+   ═══════════════════════════════════ */
+
+function initSmoothNav() {
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+}
+
+
+/* ═══════════════════════════════════
+   INIT — single entry point
+   ═══════════════════════════════════ */
+
+(function init() {
+  // Initialize slider
+  new Slider({
+    viewport:  document.getElementById('sliderViewport'),
+    track:     document.getElementById('sliderTrack'),
+    btnPrev:   document.getElementById('btnPrev'),
+    btnNext:   document.getElementById('btnNext'),
+    fillEl:    document.getElementById('sliderFill'),
+    currentEl: document.getElementById('sliderCurrent'),
+    totalEl:   document.getElementById('sliderTotal'),
+  });
+
+  // Initialize other modules
+  initContactForm(document.getElementById('contactForm'));
+  initReveal();
+  initSmoothNav();
+})();
+</script>
+</body>
+</html>
