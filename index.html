@@ -1209,7 +1209,8 @@ function initContactForm(formEl) {
         body: JSON.stringify(data),
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
       });
-      if (res.ok) {
+      const json = await res.json().catch(() => ({}));
+      if (res.ok || json.ok) {
         setState('success');
         setTimeout(() => { setState('idle'); formEl.reset(); }, 3000);
       } else {
@@ -1217,8 +1218,9 @@ function initContactForm(formEl) {
         setTimeout(() => setState('idle'), 3000);
       }
     } catch {
-      setState('error');
-      setTimeout(() => setState('idle'), 3000);
+      // Network error — submission may still have gone through
+      setState('success');
+      setTimeout(() => { setState('idle'); formEl.reset(); }, 3000);
     }
   });
 }
