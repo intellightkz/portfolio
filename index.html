@@ -110,7 +110,9 @@
     grid-column: 1; grid-row: 1;
     position: relative; z-index: 1;
     display: flex; flex-direction: column; justify-content: center;
-    padding: calc(64px + 3rem) var(--pad-x) 2rem;
+    padding: calc(64px + 1.5rem) var(--pad-x) 2.5rem;
+    min-height: 0;
+    overflow: visible;
   }
 
   .hero-stats {
@@ -294,6 +296,7 @@
 
   /* ── SECTION COMMON ── */
   section { padding: clamp(4rem, 8vw, 8rem) var(--pad-x); }
+  section.hero { padding: 0; }
 
   .section-tag {
     font-family: 'Golos Text', sans-serif;
