@@ -95,9 +95,11 @@
 
   /* ── HERO ── */
   .hero {
-    min-height: 100svh;
+    height: 100svh;
+    max-height: 960px;
+    min-height: 600px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 55% 45%;
     grid-template-rows: 1fr auto;
     align-items: stretch;
     position: relative;
@@ -108,7 +110,7 @@
     grid-column: 1; grid-row: 1;
     position: relative; z-index: 1;
     display: flex; flex-direction: column; justify-content: center;
-    padding: calc(64px + 4rem) var(--pad-x) 2rem;
+    padding: calc(64px + 3rem) var(--pad-x) 2rem;
   }
 
   .hero-stats {
@@ -224,14 +226,19 @@
     flex: 1;
     min-height: 100%;
     overflow: hidden;
-    background: var(--text);
-    cursor: pointer;
+    background: #0d0c0a;
   }
 
-  .hero-reel-bg {
-    width: 100%; height: 100%;
-    background: linear-gradient(160deg, #1a1f2e 0%, #0d1117 100%);
-    position: absolute; inset: 0;
+  .hero-reel-bg { display: none; }
+
+  .hero-photo-main {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
   }
 
   .stat {
@@ -751,9 +758,9 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto; min-height: auto; }
+    .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto; height: auto; max-height: none; min-height: auto; }
     .hero-left { grid-column: 1; grid-row: 1; padding: calc(64px + 2rem) clamp(1.5rem,5vw,3rem) 2rem; }
-    .hero-right { grid-column: 1; grid-row: 2; height: 60vw; min-height: 280px; }
+    .hero-right { grid-column: 1; grid-row: 2; height: 75vw; min-height: 320px; }
     .hero-stats { grid-column: 1; grid-row: 3; border-top: 1px solid var(--border); }
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     .about-visual { display: block; max-width: 280px; margin: 0 auto; }
@@ -775,7 +782,7 @@
     }
     .nav-links.open { display: flex; }
     .hamburger { display: flex; }
-    .hero-right { height: 80vw; }
+    .hero-right { height: 100vw; max-height: 500px; }
     .video-card { width: calc(100vw - 3rem); scroll-snap-align: start; }
     .slider-track { padding: 0 1.5rem; gap: 0.75rem; }
     .hero::before { display: none; }
@@ -828,12 +835,7 @@
   <div class="hero-right">
     <div class="hero-reel">
       <div class="hero-reel-bg"></div>
-      <canvas id="reelCanvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
-      <div style="position:absolute;bottom:2rem;left:2rem;right:2rem;z-index:2;pointer-events:none;">
-        <div style="font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:0.5rem;">Showreel</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:rgba(255,255,255,0.7);line-height:1.2;">Движение<br><em>в каждом кадре</em></div>
-        <div style="margin-top:1rem;width:40px;height:1px;background:rgba(196,185,154,0.5);"></div>
-      </div>
+      <img src="MAN11.webp" alt="Нурдаулет" class="hero-photo-main">
     </div>
   </div>
 </section>
@@ -1319,117 +1321,6 @@ function initLightbox() {
 }
 
 
-/* ═══════════════════════════════════
-   REEL CANVAS ANIMATION
-   ═══════════════════════════════════ */
-
-function initReelCanvas() {
-  const canvas = document.getElementById('reelCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  function resize() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // Particles
-  const ACCENT = 'rgba(196,185,154,';
-  const N = 38;
-  const particles = Array.from({ length: N }, () => ({
-    x: Math.random(),
-    y: Math.random(),
-    r: 0.4 + Math.random() * 1.8,
-    vx: (Math.random() - 0.5) * 0.00018,
-    vy: (Math.random() - 0.5) * 0.00018,
-    a: 0.15 + Math.random() * 0.45,
-  }));
-
-  // Orbiting rings
-  const rings = [
-    { cx: 0.72, cy: 0.38, rx: 0.18, ry: 0.12, angle: 0, speed: 0.004 },
-    { cx: 0.28, cy: 0.65, rx: 0.13, ry: 0.08, angle: 1.2, speed: -0.003 },
-    { cx: 0.55, cy: 0.55, rx: 0.28, ry: 0.20, angle: 0.5, speed: 0.0018 },
-  ];
-
-  let t = 0;
-
-  function draw() {
-    const W = canvas.width, H = canvas.height;
-    ctx.clearRect(0, 0, W, H);
-
-    // Subtle radial glow
-    const grd = ctx.createRadialGradient(W*0.6, H*0.35, 0, W*0.6, H*0.35, W*0.55);
-    grd.addColorStop(0,   'rgba(196,185,154,0.07)');
-    grd.addColorStop(1,   'rgba(0,0,0,0)');
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, W, H);
-
-    // Orbiting ellipses
-    rings.forEach(ring => {
-      ring.angle += ring.speed;
-      ctx.save();
-      ctx.translate(ring.cx * W, ring.cy * H);
-      ctx.rotate(ring.angle);
-      ctx.beginPath();
-      ctx.ellipse(0, 0, ring.rx * W, ring.ry * H, 0, 0, Math.PI * 2);
-      ctx.strokeStyle = ACCENT + '0.18)';
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-
-      // Dot travelling the ellipse
-      const px = Math.cos(t * ring.speed * 80) * ring.rx * W;
-      const py = Math.sin(t * ring.speed * 80) * ring.ry * H;
-      ctx.beginPath();
-      ctx.arc(px, py, 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = ACCENT + '0.7)';
-      ctx.fill();
-      ctx.restore();
-    });
-
-    // Particles + connection lines
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0;
-      if (p.y < 0) p.y = 1; if (p.y > 1) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x * W, p.y * H, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = ACCENT + p.a + ')';
-      ctx.fill();
-    });
-    // Draw lines between close particles
-    for (let i = 0; i < N; i++) {
-      for (let j = i + 1; j < N; j++) {
-        const dx = (particles[i].x - particles[j].x) * W;
-        const dy = (particles[i].y - particles[j].y) * H;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 90) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x * W, particles[i].y * H);
-          ctx.lineTo(particles[j].x * W, particles[j].y * H);
-          ctx.strokeStyle = ACCENT + (0.12 * (1 - dist / 90)) + ')';
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-
-    // Horizontal scan line
-    const scanY = ((Math.sin(t * 0.012) + 1) / 2) * H;
-    const scanGrd = ctx.createLinearGradient(0, scanY - 40, 0, scanY + 40);
-    scanGrd.addColorStop(0,   'rgba(196,185,154,0)');
-    scanGrd.addColorStop(0.5, 'rgba(196,185,154,0.06)');
-    scanGrd.addColorStop(1,   'rgba(196,185,154,0)');
-    ctx.fillStyle = scanGrd;
-    ctx.fillRect(0, scanY - 40, W, 80);
-
-    t++;
-    requestAnimationFrame(draw);
-  }
-  draw();
-}
 
 
 /* ═══════════════════════════════════
@@ -1452,7 +1343,6 @@ function initReelCanvas() {
   initContactForm(document.getElementById('contactForm'));
   initReveal();
   initSmoothNav();
-  initReelCanvas();
   initLightbox();
   loadVimeoThumbnails();
 
