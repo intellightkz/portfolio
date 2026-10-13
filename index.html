@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NurdaMotion — Моушн-дизайнер</title>
-<meta name="description" content="Моушн-дизайнер, специализирующийся на контенте для социальных сетей и брендовой анимации. Открыт к проектам.">
+<title>NurdaMotion — Motion Designer &amp; Video Editor</title>
+<meta name="description" content="Nurdaulet Zhumaliyev — motion designer and video editor. Product UI animation, fitness promos, social edits and localized creative. Available for remote roles.">
+<link rel="canonical" href="https://nurdamotion.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="NurdaMotion — Motion Designer &amp; Video Editor">
+<meta property="og:description" content="Product UI animation, fitness promos, social edits and localized creative by Nurdaulet Zhumaliyev.">
+<meta property="og:url" content="https://nurdamotion.vercel.app/">
+<meta property="og:image" content="https://nurdamotion.vercel.app/MAN11.webp">
+<meta property="og:image:alt" content="Nurdaulet Zhumaliyev">
+<link rel="canonical" href="https://nurdamotion.vercel.app/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Golos+Text:wght@300;400;500&display=swap" rel="stylesheet">
@@ -27,6 +35,10 @@
   }
 
   html { scroll-behavior: smooth; font-size: 16px; }
+  [hidden] { display: none !important; }
+  button { font: inherit; }
+  a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 5px; }
+  section[id] { scroll-margin-top: 64px; }
 
   body {
     background: var(--bg);
@@ -91,7 +103,7 @@
 
   .nav-cta:hover { background: var(--accent-dark) !important; color: var(--white) !important; }
 
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: 0; background: transparent; padding: 0.75rem; }
   .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: 0.3s; }
 
   /* ── HERO ── */
@@ -190,6 +202,7 @@
     opacity: 0; transform: translateY(12px);
     animation: fadeUp 0.8s 0.5s forwards;
   }
+  .hero-note { margin-top: 1.25rem; color: var(--accent-dark); font-size: 0.78rem; line-height: 1.6; }
 
   .btn-primary {
     display: inline-flex; align-items: center; gap: 0.5rem;
@@ -320,8 +333,31 @@
     color: var(--text);
   }
 
+  /* ── SELECTED WORK ── */
+  .featured-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .section-intro { max-width: 52ch; margin-top: 1rem; color: var(--muted); font-size: 0.95rem; }
+  .work-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 2rem 0; }
+  .filter-btn { border: 1px solid var(--border); background: transparent; border-radius: 100px; padding: 0.55rem 1rem; color: var(--text); font-size: 0.78rem; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .filter-btn:hover { border-color: var(--accent-dark); }
+  .filter-btn[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--white); }
+  .featured-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem 1.25rem; }
+  .featured-card { min-width: 0; }
+  .featured-play { display: block; position: relative; width: 100%; border: 0; border-radius: 8px; overflow: hidden; background: #161513; cursor: pointer; aspect-ratio: 9 / 12; color: white; }
+  .featured-play img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s; }
+  .featured-play:hover img { transform: scale(1.025); }
+  .featured-play::after { content: ''; position: absolute; inset: 50% 0 0; background: linear-gradient(transparent, rgba(0,0,0,0.45)); pointer-events: none; }
+  .featured-play-label { position: absolute; z-index: 1; left: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 500; background: rgba(13,12,10,0.75); border: 1px solid rgba(255,255,255,0.3); border-radius: 100px; padding: 0.5rem 0.8rem; }
+  .featured-play-label svg { fill: currentColor; width: 11px; height: 11px; }
+  .featured-title { font-family: 'Jost', sans-serif; font-size: 1.12rem; line-height: 1.35; font-weight: 600; margin-top: 1rem; }
+  .featured-subtitle { font-size: 0.88rem; line-height: 1.5; color: var(--accent-dark); margin-top: 0.2rem; }
+  .featured-meta { color: var(--muted); font-size: 0.72rem; letter-spacing: 0.02em; margin: 0.65rem 0; }
+  .featured-description { color: var(--muted); font-size: 0.85rem; line-height: 1.75; max-width: 48ch; }
+  .work-status { color: var(--muted); font-size: 0.75rem; margin-top: 1.5rem; }
+  .workflow-link { display: inline-flex; margin-top: 1.25rem; font-size: 0.78rem; color: var(--accent-dark); text-underline-offset: 4px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
   /* ── PORTFOLIO SLIDER ── */
-  #work { background: var(--bg); padding-left: 0; padding-right: 0; padding-bottom: 0; }
+  #archive { background: var(--bg); padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; }
 
   .slider-header {
     display: flex; align-items: flex-end; justify-content: space-between;
@@ -385,6 +421,9 @@
     background: var(--text);
     scroll-snap-align: start;
     transition: box-shadow 0.3s, transform 0.3s;
+    padding: 0;
+    border: 0;
+    text-align: left;
   }
   .video-card:hover { box-shadow: 0 20px 48px rgba(0,0,0,0.18); transform: translateY(-4px); }
 
@@ -404,7 +443,7 @@
     border-radius: 50%;
     border: 1.5px solid rgba(255,255,255,0.8);
     display: flex; align-items: center; justify-content: center;
-    opacity: 0; transform: scale(0.85);
+    opacity: 1; transform: scale(1);
     transition: opacity 0.3s, transform 0.3s;
   }
 
@@ -412,15 +451,17 @@
 
   .play-btn svg { width: 14px; height: 14px; fill: white; margin-left: 2px; }
 
+  .video-card-caption {
     position: absolute; bottom: 0; left: 0; right: 0;
     padding: 2rem 1rem 1rem;
     background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
-    transform: translateY(4px); opacity: 0;
+    transform: translateY(0); opacity: 1;
     transition: opacity 0.3s, transform 0.3s;
   }
 
 
   .video-card-title {
+    display: block;
     font-family: 'Jost', sans-serif;
     font-size: 0.82rem;
     font-weight: 600;
@@ -430,6 +471,7 @@
   }
 
   .video-card-tag {
+    display: block;
     font-size: 0.68rem;
     color: rgba(255,255,255,0.6);
     letter-spacing: 0.06em;
@@ -681,57 +723,61 @@
     position: fixed; inset: 0; z-index: 500;
     background: rgba(0,0,0,0.92);
     align-items: center; justify-content: center;
-    padding: 1.5rem;
+    padding: 1.25rem;
+    width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0;
   }
+  .lightbox::backdrop { background: transparent; }
   .lightbox.open { display: flex; }
 
   .lightbox-inner {
     position: relative;
     width: 100%;
-    max-width: 420px;
+    max-width: 460px;
+    max-height: calc(100dvh - 2.5rem);
+    display: flex;
+    flex-direction: column;
+  }
+  .lightbox-inner.is-landscape { max-width: 1040px; }
+  .lightbox-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.6rem; flex-shrink: 0; }
+
+  #lightboxPlayer {
+    width: 100%;
     aspect-ratio: 9 / 16;
-    border-radius: 8px;
+    max-height: calc(100dvh - 7.5rem);
+    min-height: 0;
+    border-radius: 6px;
     overflow: hidden;
     background: #000;
     box-shadow: 0 32px 80px rgba(0,0,0,0.6);
   }
+  .is-landscape #lightboxPlayer { aspect-ratio: 16 / 9; }
 
-  #lightboxPlayer {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  #lightboxPlayer iframe {
+  #lightboxPlayer iframe, #lightboxPlayer video {
     width: 100%; height: 100%;
     border: none; display: block;
   }
 
   .lightbox-close {
-    position: absolute;
-    top: -3rem; right: 0;
+    flex-shrink: 0;
     background: none; border: none;
     color: rgba(255,255,255,0.7);
     font-size: 1.6rem;
     cursor: pointer;
     line-height: 1;
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem;
     transition: color 0.2s;
   }
   .lightbox-close:hover { color: #fff; }
 
   .lightbox-title {
-    position: absolute;
-    bottom: -2.8rem; left: 0;
     font-family: 'Golos Text', sans-serif;
     font-size: 0.8rem;
-    color: rgba(255,255,255,0.5);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.5;
     max-width: 100%;
   }
+  .lightbox-hint { color: rgba(255,255,255,0.6); font-size: 0.7rem; margin-top: 0.65rem; }
 
   /* Card thumbnail state */
   .video-card.has-thumb .video-placeholder { background: none !important; }
@@ -781,6 +827,7 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
+    .featured-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto; height: auto; max-height: none; min-height: auto; }
     .hero-left { grid-column: 1; grid-row: 1; padding: calc(64px + 2rem) clamp(1.5rem,5vw,3rem) 2rem; }
     .hero-right { grid-column: 1; grid-row: 2; height: 75vw; min-height: 320px; }
@@ -792,6 +839,15 @@
   }
 
   @media (max-width: 600px) {
+    .featured-grid { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+    .featured-play { aspect-ratio: 9 / 12; }
+    .featured-header { gap: 1rem; }
+    .work-filters { gap: 0.4rem; }
+    .filter-btn { padding: 0.5rem 0.75rem; font-size: 0.72rem; }
+    .hero-title { font-size: clamp(3.5rem, 13vw, 5rem); }
+    .stat { padding: 1rem 0.5rem; }
+    .stat-num { font-size: 1rem; }
+    .stat-label { font-size: 0.62rem; }
     .nav-links {
       display: none;
       position: absolute;
@@ -811,54 +867,62 @@
     .hero::before { display: none; }
     .form-row { grid-template-columns: 1fr; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .hero-tag, .hero-title, .hero-desc, .hero-actions, .hero-stats, .reveal.will-animate { opacity: 1; transform: none; }
+    .marquee-track { width: auto; flex-wrap: wrap; justify-content: center; gap: 1rem 2rem; }
+    .marquee-item:nth-child(n+10) { display: none; }
+  }
 </style>
 </head>
-<body>
+<body id="top">
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">NurdaMotion</a>
-  <ul class="nav-links">
-    <li><a href="#work">Работы</a></li>
-    <li><a href="#about">Обо мне</a></li>
-    <li><a href="#contact">Контакт</a></li>
-    <li><a href="#contact" class="nav-cta">Поговорим</a></li>
+  <a href="#top" class="nav-logo">NurdaMotion</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Let’s talk</a></li>
   </ul>
-  <div class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')">
+  <button class="hamburger" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks">
     <span></span><span></span><span></span>
-  </div>
+  </button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-tag">Моушн-дизайнер · Открыт к проектам</div>
-    <h1 class="hero-title">Движение,<br>которое <em>цепляет.</em></h1>
+    <div class="hero-tag">Motion Designer &amp; Video Editor</div>
+    <h1 class="hero-title">Motion,<br>made <em>clear.</em></h1>
     <p class="hero-desc">
-      Моушн-дизайн для брендов, которые хотят остановить скролл. Специализация — короткий формат, полный цикл: от брифа до финального рендера.
+      I turn product stories and social footage into engaging video — with expressive type, thoughtful UI motion and a clean edit.
     </p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">
-        Написать
+      <a href="#work" class="btn-primary">
+        View selected work
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
       <a href="/resume.pdf" class="btn-ghost" download>
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 2v8M5 7l3 3 3-3M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Скачать резюме
+        Download resume
       </a>
     </div>
+    <p class="hero-note">Nurdaulet Zhumaliyev · Based in Kazakhstan<br>Available for remote roles and collaborations.</p>
   </div>
 
   <div class="hero-stats">
-    <div class="stat"><span class="stat-num">3+</span><span class="stat-label">Лет опыта</span></div>
-    <div class="stat"><span class="stat-num">40+</span><span class="stat-label">Проектов</span></div>
-    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Идей</span></div>
+    <div class="stat"><span class="stat-num">Product UI</span><span class="stat-label">Motion design</span></div>
+    <div class="stat"><span class="stat-num">Social edits</span><span class="stat-label">Video storytelling</span></div>
+    <div class="stat"><span class="stat-num">Localization</span><span class="stat-label">Campaign adaptations</span></div>
   </div>
 
   <div class="hero-right">
     <div class="hero-reel">
       <div class="hero-reel-bg"></div>
-      <img src="MAN11.webp" alt="Нурдаулет" class="hero-photo-main">
+      <img src="MAN11.webp" alt="Nurdaulet Zhumaliyev" class="hero-photo-main">
     </div>
   </div>
 </section>
@@ -872,8 +936,8 @@
     <div class="marquee-item">Figma</div>
     <div class="marquee-item">DaVinci Resolve</div>
     <div class="marquee-item">Premiere Pro</div>
-    <div class="marquee-item">Анимация для соцсетей</div>
-    <div class="marquee-item">Брендовая анимация</div>
+    <div class="marquee-item">Social video</div>
+    <div class="marquee-item">Brand animation</div>
     <div class="marquee-item">Creative Designer</div>
     <div class="marquee-item">After Effects</div>
     <div class="marquee-item">Photoshop</div>
@@ -881,18 +945,94 @@
     <div class="marquee-item">Figma</div>
     <div class="marquee-item">DaVinci Resolve</div>
     <div class="marquee-item">Premiere Pro</div>
-    <div class="marquee-item">Анимация для соцсетей</div>
-    <div class="marquee-item">Брендовая анимация</div>
+    <div class="marquee-item">Social video</div>
+    <div class="marquee-item">Brand animation</div>
     <div class="marquee-item">Creative Designer</div>
   </div>
 </div>
 
+<!-- SELECTED WORK -->
+<section id="work" aria-labelledby="featuredTitle">
+  <div class="featured-header">
+    <div>
+      <div class="section-tag">Selected work</div>
+      <h2 class="section-title" id="featuredTitle">Product stories.<br><em>Human moments.</em></h2>
+      <p class="section-intro">Five films spanning fitness, product UI and social storytelling. English and Russian work, in vertical and widescreen formats.</p>
+    </div>
+    <a href="#archive" class="btn-ghost">Explore the archive ↓</a>
+  </div>
+  <div class="work-filters" role="group" aria-label="Filter selected work">
+    <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All work</button>
+    <button class="filter-btn" type="button" data-filter="wellness" aria-pressed="false">Wellness &amp; fitness</button>
+    <button class="filter-btn" type="button" data-filter="product" aria-pressed="false">Product stories</button>
+    <button class="filter-btn" type="button" data-filter="social" aria-pressed="false">Social edits</button>
+  </div>
+  <div class="featured-grid" id="featuredGrid">
+    <article class="featured-card" data-slug="coursiv" data-categories="wellness product">
+      <button class="featured-play" type="button" data-video-src="media/coursiv.mp4" data-poster="media/coursiv.webp" data-title="Coursiv — AI agents for fitness businesses" data-aspect="portrait" aria-label="Play Coursiv — AI agents for fitness businesses">
+        <img src="media/coursiv.webp" alt="" width="1080" height="1920" loading="lazy" decoding="async">
+        <span class="featured-play-label"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z"/></svg>Watch film <span aria-hidden="true">· 34s</span></span>
+      </button>
+      <h3 class="featured-title">Coursiv</h3>
+      <p class="featured-subtitle">AI agents for fitness businesses</p>
+      <p class="featured-meta">English · 9:16 · 34 sec</p>
+      <p class="featured-description">Animated chat, integrations and calendar sequences turn product features into a clear, benefit-led story.</p>
+    </article>
+
+    <article class="featured-card" data-slug="hero-journey" data-categories="wellness product">
+      <button class="featured-play" type="button" data-video-src="media/hero-journey.mp4" data-poster="media/hero-journey.webp" data-title="Hero’s Journey — Fitness onboarding promo" data-aspect="portrait" aria-label="Play Hero’s Journey — Fitness onboarding promo">
+        <img src="media/hero-journey.webp" alt="" width="1080" height="1920" loading="lazy" decoding="async">
+        <span class="featured-play-label"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z"/></svg>Watch film <span aria-hidden="true">· 44s</span></span>
+      </button>
+      <h3 class="featured-title">Hero’s Journey</h3>
+      <p class="featured-subtitle">Fitness onboarding promo</p>
+      <p class="featured-meta">Russian · 9:16 · 44 sec</p>
+      <p class="featured-description">Gym footage meets assessment scores, workout controls and questionnaire UI, with a branded call to action.</p>
+    </article>
+
+    <article class="featured-card" data-slug="moonai" data-categories="product">
+      <button class="featured-play" type="button" data-video-src="media/moonai.mp4" data-poster="media/moonai.webp" data-title="MoonAI — Lead response explainer" data-aspect="landscape" aria-label="Play MoonAI — Lead response explainer">
+        <img src="media/moonai.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+        <span class="featured-play-label"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z"/></svg>Watch film <span aria-hidden="true">· 40s</span></span>
+      </button>
+      <h3 class="featured-title">MoonAI</h3>
+      <p class="featured-subtitle">Lead response explainer</p>
+      <p class="featured-meta">Russian · 16:9 · 40 sec</p>
+      <p class="featured-description">Message UI, typographic scene cards and a lead dashboard carry an enquiry through to a branded payoff.</p>
+    </article>
+
+    <article class="featured-card" data-slug="qoldau-study" data-categories="social">
+      <button class="featured-play" type="button" data-video-src="media/qoldau-study.mp4" data-poster="media/qoldau-study.webp" data-title="Qoldau Study — Conversation reel" data-aspect="portrait" aria-label="Play Qoldau Study — Conversation reel">
+        <img src="media/qoldau-study.webp" alt="" width="1080" height="1920" loading="lazy" decoding="async">
+        <span class="featured-play-label"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z"/></svg>Watch film <span aria-hidden="true">· 62s</span></span>
+      </button>
+      <h3 class="featured-title">Qoldau Study</h3>
+      <p class="featured-subtitle">Conversation reel</p>
+      <p class="featured-meta">Russian · 9:16 · 62 sec</p>
+      <p class="featured-description">Circular speaker cutouts, captions and countdown graphics keep a conversation moving, with interface cards woven into the edit.</p>
+    </article>
+
+    <article class="featured-card" data-slug="aviasales" data-categories="social">
+      <button class="featured-play" type="button" data-video-src="media/aviasales.mp4" data-poster="media/aviasales.webp" data-title="Aviasales — Sci-fi social edit" data-aspect="portrait" aria-label="Play Aviasales — Sci-fi social edit">
+        <img src="media/aviasales.webp" alt="" width="1080" height="1920" loading="lazy" decoding="async">
+        <span class="featured-play-label"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z"/></svg>Watch film <span aria-hidden="true">· 104s</span></span>
+      </button>
+      <h3 class="featured-title">Aviasales</h3>
+      <p class="featured-subtitle">Sci-fi social edit</p>
+      <p class="featured-meta">Russian · 9:16 · 104 sec</p>
+      <p class="featured-description">Speaker reframing, dialogue captions and sci-fi inserts shape a conversation edit around a branded countdown.</p>
+    </article>
+  </div>
+  <p class="work-status" id="workStatus" aria-live="polite">Showing all 5 films.</p>
+</section>
+
 <!-- PORTFOLIO SLIDER -->
-<section id="work">
+<section id="archive" aria-labelledby="archiveTitle">
   <div class="slider-header">
     <div>
-      <div class="section-tag reveal">Избранные работы</div>
-      <h2 class="section-title reveal">Портфолио</h2>
+      <div class="section-tag reveal">More motion work</div>
+      <h2 class="section-title reveal" id="archiveTitle">From the archive.</h2>
+      <p class="section-intro">Fourteen earlier pieces — explore the original collection.</p>
     </div>
     <div class="slider-controls">
       <div class="slider-progress"><div class="slider-progress-fill" id="sliderFill"></div></div>
@@ -906,110 +1046,120 @@
     </div>
   </div>
 
-  <div class="slider-viewport" id="sliderViewport">
+  <div class="slider-viewport" id="sliderViewport" tabindex="0" role="region" aria-label="Archive video carousel. Use the arrow keys to browse.">
     <div class="slider-track" id="sliderTrack">
 
-    <!-- TODO: replace each data-vimeo-id with your real Vimeo video ID -->
-    <!-- Find IDs in your Vimeo URL: vimeo.com/XXXXXXXXX -->
-    <!-- Update title and tag to match your real projects -->
+    <button type="button" class="video-card" data-vimeo-id="1180884280" data-title="Archive video 01" aria-label="Play archive video 01" style="transition-delay:0s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143106891-65c6c9c355b5d67fcdb4bb227bb81f9baa3449d1e7264475f6cce82b8698ce79-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 01</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180884280" style="transition-delay:0s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143106891-65c6c9c355b5d67fcdb4bb227bb81f9baa3449d1e7264475f6cce82b8698ce79-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885507" data-title="Archive video 02" aria-label="Play archive video 02" style="transition-delay:0.06s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108313-e98ca3b72c77b69fa06ff207840fcd850c220e48eb2372f0efadb677fd983db9-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 02</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885507" style="transition-delay:0.06s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108313-e98ca3b72c77b69fa06ff207840fcd850c220e48eb2372f0efadb677fd983db9-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885357" data-title="Archive video 03" aria-label="Play archive video 03" style="transition-delay:0.12s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108101-c3ec164ba39b5ccb2623bf83592bb443a0759564fa3314c80ac87f589c0b03d9-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 03</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885357" style="transition-delay:0.12s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108101-c3ec164ba39b5ccb2623bf83592bb443a0759564fa3314c80ac87f589c0b03d9-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885402" data-title="Archive video 04" aria-label="Play archive video 04" style="transition-delay:0.18s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108200-01af6b5d1e16876d478a9b0cffd675160a363ee919c9cad80b206a1dde8704ee-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 04</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885402" style="transition-delay:0.18s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108200-01af6b5d1e16876d478a9b0cffd675160a363ee919c9cad80b206a1dde8704ee-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885446" data-title="Archive video 05" aria-label="Play archive video 05" style="transition-delay:0.24s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108251-1c5ec56ee9ed8582eba2bc2d2847e73d1a9e8412de27f97dc884c7d5bc078fee-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 05</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885446" style="transition-delay:0.24s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108251-1c5ec56ee9ed8582eba2bc2d2847e73d1a9e8412de27f97dc884c7d5bc078fee-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885560" data-title="Archive video 06" aria-label="Play archive video 06" style="transition-delay:0.3s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108373-25c29348a566b25946d227e81d852aa7c615b131e736fbc30b7aa1a35850de1c-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 06</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885560" style="transition-delay:0.3s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108373-25c29348a566b25946d227e81d852aa7c615b131e736fbc30b7aa1a35850de1c-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885600" data-title="Archive video 07" aria-label="Play archive video 07" style="transition-delay:0.36s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108420-070cdf6b52205de755bfbb2bbb39eb21e91bec4704f6d9ef27bcd949971f147d-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 07</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885600" style="transition-delay:0.36s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108420-070cdf6b52205de755bfbb2bbb39eb21e91bec4704f6d9ef27bcd949971f147d-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885652" data-title="Archive video 08" aria-label="Play archive video 08" style="transition-delay:0.42s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108481-aeb99741879a16a7741292f71a2aa9ff919579fa792d98a10bb0239c367f52f6-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 08</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885652" style="transition-delay:0.42s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108481-aeb99741879a16a7741292f71a2aa9ff919579fa792d98a10bb0239c367f52f6-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885727" data-title="Archive video 09" aria-label="Play archive video 09" style="transition-delay:0.48s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108569-9b4b17fdc921308fb8ed7c319bfc6dc8598ca690f558b0092f919db9c1dd89bd-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 09</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885727" style="transition-delay:0.48s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108569-9b4b17fdc921308fb8ed7c319bfc6dc8598ca690f558b0092f919db9c1dd89bd-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885760" data-title="Archive video 10" aria-label="Play archive video 10" style="transition-delay:0.54s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108603-ff4bc37457a3501677c3ba06bf686677ab52bb05501e30b4e165024e94cd09f5-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 10</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885760" style="transition-delay:0.54s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108603-ff4bc37457a3501677c3ba06bf686677ab52bb05501e30b4e165024e94cd09f5-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885798" data-title="Archive video 11" aria-label="Play archive video 11" style="transition-delay:0.6s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108658-36cddf357e890443565f319d819a06b42befeccd54fb9dacdc725cd6605130a4-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 11</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885798" style="transition-delay:0.6s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108658-36cddf357e890443565f319d819a06b42befeccd54fb9dacdc725cd6605130a4-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885831" data-title="Archive video 12" aria-label="Play archive video 12" style="transition-delay:0.66s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108722-ab447d6b5cdffbaf97641f8849aae3a4636c03160dfa6ce57dd49ab253078e75-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 12</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885831" style="transition-delay:0.66s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108722-ab447d6b5cdffbaf97641f8849aae3a4636c03160dfa6ce57dd49ab253078e75-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885878" data-title="Archive video 13" aria-label="Play archive video 13" style="transition-delay:0.72s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108755-cb3a2da8cf7ae351aaf8fca3f8f21618d93facea2b1d7e354e6cb72bb5cbcf71-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 13</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
-    <div class="video-card" data-vimeo-id="1180885878" style="transition-delay:0.72s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108755-cb3a2da8cf7ae351aaf8fca3f8f21618d93facea2b1d7e354e6cb72bb5cbcf71-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
-
-    <div class="video-card" data-vimeo-id="1180885917" style="transition-delay:0.78s">
-      <div class="video-card-inner">
-        <div class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108803-9684a4674790ab175e0f6498d1697f8fd7ab5f3ffd02c7385d0554f2eebac876-d_640?region=us');background-size:cover;background-position:top center"></div>
-        <div class="video-card-overlay"><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></div></div>
-      </div>
-    </div>
+    <button type="button" class="video-card" data-vimeo-id="1180885917" data-title="Archive video 14" aria-label="Play archive video 14" style="transition-delay:0.78s">
+      <span class="video-card-inner">
+        <span class="video-placeholder" style="background-image:url('https://i.vimeocdn.com/video/2143108803-9684a4674790ab175e0f6498d1697f8fd7ab5f3ffd02c7385d0554f2eebac876-d_640?region=us');background-size:cover;background-position:top center"></span>
+        <span class="video-card-overlay"><span class="play-btn"><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></span>
+      </span>
+      <span class="video-card-caption"><span class="video-card-title">Archive 14</span><span class="video-card-tag">Previous motion work</span></span>
+    </button>
 
     </div>
   </div>
@@ -1021,33 +1171,30 @@
     <div class="about-visual">
       <div class="about-img-wrap">
         <div class="about-img-inner">
-          <img src="2photo.webp" alt="Нурдаулет — Моушн-дизайнер" class="about-photo">
+          <img src="2photo.webp" alt="Nurdaulet Zhumaliyev, motion designer and video editor" class="about-photo">
         </div>
       </div>
-      <div class="about-badge">Моушн<br>дизайнер<br>2021 →</div>
+      <div class="about-badge">Motion<br>with<br>intention</div>
     </div>
 
     <div class="about-text">
-      <div class="section-tag reveal">Обо мне</div>
-      <h2 class="section-title reveal">Моушн с<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--accent-dark)">намерением.</em></h2>
+      <div class="section-tag reveal">About</div>
+      <h2 class="section-title reveal">A considered<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--accent-dark)">way to move.</em></h2>
       <p class="about-body reveal">
-        Я моушн-дизайнер с сильной базой в <strong>контенте для социальных сетей</strong> — том самом, который останавливает скролл. Будь то 6-секундный бампер или полноценная система брендовой анимации — в каждый кадр я вкладываю одинаковую <strong>одержимость качеством</strong>.
+        I’m Nurdaulet, a <strong>Creative Designer at Zimran / Pivex</strong>. My work spans Meta UGC creative, product demos and localized campaigns, including Arabic, Japanese and Chinese adaptations.
         <br><br>
-        Легко веду проект от брифа до сдачи. Открыт к штатным позициям и фриланс-проектам с амбициозными командами.
+        I combine motion and editing craft with <strong>reusable templates and visual QA</strong>, keeping the story clear from the first cut to the final export. I’m open to remote motion design and video editing roles.
       </p>
-      <div class="skills-grid reveal">
+      <div class="skills-grid reveal" aria-label="Skills and production experience">
         <span class="skill-tag">After Effects</span>
-        <span class="skill-tag">Photoshop</span>
-        <span class="skill-tag">Illustrator</span>
-        <span class="skill-tag">Figma</span>
-        <span class="skill-tag">DaVinci Resolve</span>
         <span class="skill-tag">Premiere Pro</span>
-        <span class="skill-tag">Анимация для соцсетей</span>
-        <span class="skill-tag">Брендовая анимация</span>
-        <span class="skill-tag">Creative Designer</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Localized campaigns</span>
+        <span class="skill-tag">Templates &amp; visual QA</span>
       </div>
       <div class="reveal">
-        <a href="#contact" class="btn-primary">Начать разговор</a>
+        <a href="#contact" class="btn-primary">Let’s talk</a>
+        <br><a href="https://github.com/intellightkz/ugc-ad-factory" class="workflow-link" target="_blank" rel="noopener">AI production workflow ↗</a>
       </div>
     </div>
   </div>
@@ -1056,14 +1203,14 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-wrap">
-    <div class="section-tag">Контакт</div>
-    <h2 class="contact-title">Создадим что-то <em>крутое.</em></h2>
+    <div class="section-tag">Contact</div>
+    <h2 class="contact-title">Let’s make it <em>move.</em></h2>
     <p class="contact-sub">
-      Вы рекрутер крупной технологической компании или бренд с амбициозным брифом — напишите, буду рад.
+      Looking for a motion designer or video editor? I’m available for remote roles and creative collaborations. Send a message — I’d love to hear about your team.
     </p>
 
     <div class="contact-btns">
-      <a href="https://wa.me/77006652831?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D0%BF%D0%B8%D1%88%D1%83%20%D0%B8%D0%B7%20%D0%B2%D0%B0%D1%88%D0%B5%D0%B3%D0%BE%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0!" class="contact-btn-main" target="_blank" rel="noopener">
+      <a href="https://wa.me/77006652831?text=Hi%20Nurdaulet%2C%20I%20found%20your%20motion%20portfolio." class="contact-btn-main" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp
       </a>
@@ -1076,18 +1223,21 @@
 </section>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-  <div class="lightbox-inner">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">✕</button>
+<dialog class="lightbox" id="lightbox" aria-labelledby="lightboxTitle" aria-describedby="lightboxHint" hidden>
+  <div class="lightbox-inner" id="lightboxInner">
+    <div class="lightbox-toolbar">
+      <h2 class="lightbox-title" id="lightboxTitle">Video player</h2>
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close video">✕</button>
+    </div>
     <div id="lightboxPlayer"></div>
-    <div class="lightbox-title" id="lightboxTitle"></div>
+    <p class="lightbox-hint" id="lightboxHint">Use the player controls for sound and fullscreen. Press Escape to close.</p>
   </div>
-</div>
+</dialog>
 
 <!-- FOOTER -->
 <footer>
-  <a href="#" class="footer-logo">NurdaMotion</a>
-  <span class="footer-copy">© 2026 NurdaMotion. Все права защищены.</span>
+  <a href="#top" class="footer-logo">NurdaMotion</a>
+  <span class="footer-copy">© 2026 NurdaMotion. All rights reserved.</span>
   <div class="footer-socials">
     <a href="https://www.instagram.com/nurda6foot4/" class="social-link" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.behance.net/nurda6foot4" class="social-link" target="_blank" rel="noopener">Behance</a>
@@ -1097,270 +1247,248 @@
 </footer>
 
 <script>
-/* ═══════════════════════════════════
-   SLIDER CLASS — portable, testable
-   ═══════════════════════════════════ */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 class Slider {
   constructor({ viewport, track, btnPrev, btnNext, fillEl, currentEl, totalEl }) {
-    this.viewport = viewport;
-    this.track = track;
-    this.btnPrev = btnPrev;
-    this.btnNext = btnNext;
-    this.fillEl = fillEl;
-    this.currentEl = currentEl;
+    Object.assign(this, { viewport, track, btnPrev, btnNext, fillEl, currentEl });
+    this.total = track.querySelectorAll('.video-card').length;
     this.step = 0;
     this.dragging = false;
-    this.startX = 0;
-    this.startLeft = 0;
-
-    this.total = track.querySelectorAll('.video-card').length;
+    this.didDrag = false;
+    this.suppressClick = false;
     totalEl.textContent = String(this.total).padStart(2, '0');
-
     this._bind();
     requestAnimationFrame(() => { this._initStep(); this._updateUI(); });
   }
 
   _initStep() {
-    const first = this.track.querySelector('.video-card');
-    if (first) this.step = first.getBoundingClientRect().width + 12;
+    const cards = this.track.querySelectorAll('.video-card');
+    if (cards.length > 1) this.step = cards[1].offsetLeft - cards[0].offsetLeft;
+    else if (cards[0]) this.step = cards[0].getBoundingClientRect().width;
   }
 
   _currentIdx() {
     return this.step > 0 ? Math.round(this.viewport.scrollLeft / this.step) : 0;
   }
 
-  _smoothScroll(to, duration = 420) {
-    const from = this.viewport.scrollLeft;
-    const dist = to - from;
-    if (Math.abs(dist) < 1) return;
-    const t0 = performance.now();
-    const vp = this.viewport;
-    (function tick(now) {
-      const p = Math.min((now - t0) / duration, 1);
-      const ease = p < 0.5 ? 2*p*p : -1 + (4 - 2*p)*p;
-      vp.scrollLeft = from + dist * ease;
-      if (p < 1) requestAnimationFrame(tick);
-    })(t0);
-  }
-
-  goTo(idx) {
-    idx = Math.max(0, Math.min(idx, this.total - 1));
-    this._smoothScroll(idx * this.step);
+  goTo(index) {
+    const target = Math.max(0, Math.min(index, this.total - 1)) * this.step;
+    this.viewport.scrollTo({ left: target, behavior: prefersReducedMotion.matches ? 'instant' : 'smooth' });
   }
 
   _updateUI() {
     const max = this.viewport.scrollWidth - this.viewport.clientWidth;
-    const pct = max > 0 ? Math.min(100, (this.viewport.scrollLeft / max) * 100) : 0;
-    this.fillEl.style.width = pct + '%';
-    this.currentEl.textContent = String(this._currentIdx() + 1).padStart(2, '0');
-    this.btnPrev.classList.toggle('disabled', this.viewport.scrollLeft < 2);
-    this.btnNext.classList.toggle('disabled', this.viewport.scrollLeft >= max - 2);
+    const atStart = this.viewport.scrollLeft < 2;
+    const atEnd = this.viewport.scrollLeft >= max - 2;
+    const percent = max > 0 ? Math.min(100, this.viewport.scrollLeft / max * 100) : 100;
+    this.fillEl.style.width = percent + '%';
+    this.currentEl.textContent = String(atEnd ? this.total : this._currentIdx() + 1).padStart(2, '0');
+    this.btnPrev.disabled = atStart;
+    this.btnNext.disabled = atEnd;
+    this.btnPrev.classList.toggle('disabled', atStart);
+    this.btnNext.classList.toggle('disabled', atEnd);
   }
 
   _bind() {
     this.btnPrev.addEventListener('click', () => this.goTo(this._currentIdx() - 1));
     this.btnNext.addEventListener('click', () => this.goTo(this._currentIdx() + 1));
     this.viewport.addEventListener('scroll', () => this._updateUI(), { passive: true });
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft')  this.goTo(this._currentIdx() - 1);
-      if (e.key === 'ArrowRight') this.goTo(this._currentIdx() + 1);
+    window.addEventListener('resize', () => { this._initStep(); this._updateUI(); });
+    this.viewport.addEventListener('keydown', event => {
+      if (document.getElementById('lightbox').open) return;
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      this.goTo(this._currentIdx() + (event.key === 'ArrowRight' ? 1 : -1));
     });
-
-    // Drag
-    this.viewport.addEventListener('mousedown', e => {
+    this.viewport.addEventListener('mousedown', event => {
+      if (event.button !== 0) return;
       this.dragging = true;
-      this.startX = e.pageX;
+      this.didDrag = false;
+      this.startX = event.pageX;
       this.startLeft = this.viewport.scrollLeft;
-      this.viewport.classList.add('dragging');
     });
-    window.addEventListener('mousemove', e => {
+    window.addEventListener('mousemove', event => {
       if (!this.dragging) return;
-      this.viewport.scrollLeft = this.startLeft - (e.pageX - this.startX);
+      const distance = event.pageX - this.startX;
+      if (Math.abs(distance) > 8) this.didDrag = true;
+      if (!this.didDrag) return;
+      this.viewport.classList.add('dragging');
+      this.viewport.scrollLeft = this.startLeft - distance;
     });
     window.addEventListener('mouseup', () => {
       if (!this.dragging) return;
       this.dragging = false;
       this.viewport.classList.remove('dragging');
-      this.goTo(this._currentIdx());
+      if (this.didDrag) {
+        this.suppressClick = true;
+        this.goTo(this._currentIdx());
+        setTimeout(() => { this.suppressClick = false; }, 0);
+      }
     });
+    this.viewport.addEventListener('click', event => {
+      if (!this.suppressClick) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      this.suppressClick = false;
+    }, true);
+    this.viewport.addEventListener('dragstart', event => event.preventDefault());
   }
 }
 
-
-/* ═══════════════════════════════════
-   FORM — state-machine approach
-   ═══════════════════════════════════ */
-
-function initContactForm(formEl) {
-  const btn = formEl.querySelector('.form-submit');
-  const STATES = { idle: 'Отправить →', sending: 'Отправка...', success: 'Отправлено ✓', error: 'Ошибка — попробуйте снова' };
-
-  // TODO: sign up at https://formspree.io and replace YOUR_FORM_ID below
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xnjowypp';
-
-  function setState(state) {
-    btn.textContent = STATES[state];
-    btn.style.background = state === 'success' ? '#3d6b3a' : state === 'error' ? '#8b3a3a' : '';
-    btn.disabled = state === 'sending';
+function initFeaturedWork() {
+  const grid = document.getElementById('featuredGrid');
+  const cards = Array.from(grid.querySelectorAll('.featured-card'));
+  const focus = new URLSearchParams(window.location.search).get('focus');
+  const orders = {
+    wellness: ['hero-journey', 'coursiv', 'moonai', 'qoldau-study', 'aviasales'],
+    marketing: ['coursiv', 'hero-journey', 'moonai', 'qoldau-study', 'aviasales'],
+  };
+  if (Object.hasOwn(orders, focus)) {
+    cards.sort((a, b) => orders[focus].indexOf(a.dataset.slug) - orders[focus].indexOf(b.dataset.slug));
+    cards.forEach(card => grid.appendChild(card));
   }
-
-  formEl.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    setState('sending');
-    try {
-      const formData = new FormData(formEl);
-      const data = {};
-      formData.forEach((v, k) => data[k] = v);
-      await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-      });
-      setState('success');
-      setTimeout(() => { setState('idle'); formEl.reset(); }, 3000);
-    } catch {
-      setState('error');
-      setTimeout(() => setState('idle'), 3000);
-    }
-  });
+  const buttons = Array.from(document.querySelectorAll('.filter-btn'));
+  buttons.forEach(button => button.addEventListener('click', () => {
+    const filter = button.dataset.filter;
+    buttons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+    let visible = 0;
+    cards.forEach(card => {
+      card.hidden = filter !== 'all' && !card.dataset.categories.split(' ').includes(filter);
+      if (!card.hidden) visible += 1;
+    });
+    const label = filter === 'all' ? 'all ' : '';
+    document.getElementById('workStatus').textContent = `Showing ${label}${visible} ${visible === 1 ? 'film' : 'films'}.`;
+  }));
 }
-
-
-/* ═══════════════════════════════════
-   REVEAL OBSERVER
-   ═══════════════════════════════════ */
 
 function initReveal() {
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  if (prefersReducedMotion.matches || !('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => {
-    el.classList.add('will-animate');
-    obs.observe(el);
+  document.querySelectorAll('.reveal').forEach(element => {
+    element.classList.add('will-animate');
+    observer.observe(element);
   });
 }
 
-
-/* ═══════════════════════════════════
-   SMOOTH NAV SCROLL
-   ═══════════════════════════════════ */
-
-function initSmoothNav() {
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+function initNavigation() {
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  function closeMenu() {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation');
+  }
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && links.classList.contains('open')) {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', event => {
+      const hash = link.getAttribute('href');
+      const target = hash === '#' ? document.body : document.getElementById(hash.slice(1));
+      if (!target) return;
+      event.preventDefault();
+      closeMenu();
+      target.scrollIntoView({ behavior: prefersReducedMotion.matches ? 'instant' : 'smooth' });
     });
-  });
-}
-
-
-/* ═══════════════════════════════════
-   VIMEO THUMBNAILS + LIGHTBOX
-   ═══════════════════════════════════ */
-
-function loadVimeoThumbnails() {
-  const thumbs = {
-    '1180884280': 'https://i.vimeocdn.com/video/2143106891-65c6c9c355b5d67fcdb4bb227bb81f9baa3449d1e7264475f6cce82b8698ce79-d_640?region=us',
-    '1180885507': 'https://i.vimeocdn.com/video/2143108313-e98ca3b72c77b69fa06ff207840fcd850c220e48eb2372f0efadb677fd983db9-d_640?region=us',
-    '1180885357': 'https://i.vimeocdn.com/video/2143108101-c3ec164ba39b5ccb2623bf83592bb443a0759564fa3314c80ac87f589c0b03d9-d_640?region=us',
-    '1180885402': 'https://i.vimeocdn.com/video/2143108200-01af6b5d1e16876d478a9b0cffd675160a363ee919c9cad80b206a1dde8704ee-d_640?region=us',
-    '1180885446': 'https://i.vimeocdn.com/video/2143108251-1c5ec56ee9ed8582eba2bc2d2847e73d1a9e8412de27f97dc884c7d5bc078fee-d_640?region=us',
-    '1180885560': 'https://i.vimeocdn.com/video/2143108373-25c29348a566b25946d227e81d852aa7c615b131e736fbc30b7aa1a35850de1c-d_640?region=us',
-    '1180885600': 'https://i.vimeocdn.com/video/2143108420-070cdf6b52205de755bfbb2bbb39eb21e91bec4704f6d9ef27bcd949971f147d-d_640?region=us',
-    '1180885652': 'https://i.vimeocdn.com/video/2143108481-aeb99741879a16a7741292f71a2aa9ff919579fa792d98a10bb0239c367f52f6-d_640?region=us',
-    '1180885727': 'https://i.vimeocdn.com/video/2143108569-9b4b17fdc921308fb8ed7c319bfc6dc8598ca690f558b0092f919db9c1dd89bd-d_640?region=us',
-    '1180885760': 'https://i.vimeocdn.com/video/2143108603-ff4bc37457a3501677c3ba06bf686677ab52bb05501e30b4e165024e94cd09f5-d_640?region=us',
-    '1180885798': 'https://i.vimeocdn.com/video/2143108658-36cddf357e890443565f319d819a06b42befeccd54fb9dacdc725cd6605130a4-d_640?region=us',
-    '1180885831': 'https://i.vimeocdn.com/video/2143108722-ab447d6b5cdffbaf97641f8849aae3a4636c03160dfa6ce57dd49ab253078e75-d_640?region=us',
-    '1180885878': 'https://i.vimeocdn.com/video/2143108755-cb3a2da8cf7ae351aaf8fca3f8f21618d93facea2b1d7e354e6cb72bb5cbcf71-d_640?region=us',
-    '1180885917': 'https://i.vimeocdn.com/video/2143108803-9684a4674790ab175e0f6498d1697f8fd7ab5f3ffd02c7385d0554f2eebac876-d_640?region=us',
-  };
-  document.querySelectorAll('.video-card[data-vimeo-id]').forEach(card => {
-    const id = card.dataset.vimeoId;
-    if (!thumbs[id]) return;
-    const el = card.querySelector('.video-placeholder');
-    el.style.background = 'none';
-    el.style.backgroundImage = `url('${thumbs[id]}')`;
-    el.style.backgroundSize = 'cover';
-    el.style.backgroundPosition = 'top center';
-    el.style.animation = 'none';
   });
 }
 
 function initLightbox() {
-  const lightbox  = document.getElementById('lightbox');
-  const player    = document.getElementById('lightboxPlayer');
-  const titleEl   = document.getElementById('lightboxTitle');
-  const closeBtn  = document.getElementById('lightboxClose');
+  const dialog = document.getElementById('lightbox');
+  const inner = document.getElementById('lightboxInner');
+  const player = document.getElementById('lightboxPlayer');
+  const title = document.getElementById('lightboxTitle');
+  const closeButton = document.getElementById('lightboxClose');
+  let opener = null;
+  let previousOverflow = '';
 
-  function open(vimeoId, title) {
-    player.innerHTML = `<iframe
-      src="https://player.vimeo.com/video/${vimeoId}?autoplay=1&loop=1&title=0&byline=0&portrait=0"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowfullscreen>
-    </iframe>`;
-    titleEl.textContent = title || '';
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
+  function cleanUp() {
+    const video = player.querySelector('video');
+    if (video) {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    }
+    player.replaceChildren();
+    dialog.classList.remove('open');
+    dialog.hidden = true;
+    document.body.style.overflow = previousOverflow;
+    if (opener && opener.isConnected) opener.focus({ preventScroll: true });
+    opener = null;
   }
 
   function close() {
-    lightbox.classList.remove('open');
-    player.innerHTML = '';
-    document.body.style.overflow = '';
+    if (dialog.open) dialog.close();
   }
 
-  // Open on card click
-  document.querySelectorAll('.video-card[data-vimeo-id]').forEach(card => {
-    card.addEventListener('click', () => {
-      const id = card.dataset.vimeoId;
-      if (!id || id === 'YOUR_VIDEO_ID') return;
-      const title = card.querySelector('.video-card-title')?.textContent || '';
-      open(id, title);
-    });
-  });
+  function open(button) {
+    opener = button;
+    previousOverflow = document.body.style.overflow;
+    title.textContent = button.dataset.title;
+    inner.classList.toggle('is-landscape', button.dataset.aspect === 'landscape');
+    if (button.dataset.videoSrc) {
+      const video = document.createElement('video');
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = 'metadata';
+      video.src = button.dataset.videoSrc;
+      video.poster = button.dataset.poster;
+      video.setAttribute('aria-label', button.dataset.title);
+      video.textContent = 'Your browser does not support this video.';
+      player.appendChild(video);
+    } else {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://player.vimeo.com/video/${button.dataset.vimeoId}?autoplay=1&title=0&byline=0&portrait=0`;
+      iframe.title = button.dataset.title;
+      iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+      iframe.allowFullscreen = true;
+      player.appendChild(iframe);
+    }
+    dialog.hidden = false;
+    dialog.classList.add('open');
+    dialog.showModal();
+    document.body.style.overflow = 'hidden';
+    closeButton.focus({ preventScroll: true });
+  }
 
-  closeBtn.addEventListener('click', close);
-  lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  document.querySelectorAll('button[data-video-src], button[data-vimeo-id]').forEach(button => {
+    button.addEventListener('click', () => open(button));
+  });
+  closeButton.addEventListener('click', close);
+  dialog.addEventListener('close', cleanUp);
+  dialog.addEventListener('cancel', event => { event.preventDefault(); close(); });
+  dialog.addEventListener('click', event => { if (event.target === dialog) close(); });
+  // Native dialog provides focus containment and makes the surrounding page inert.
 }
 
-
-
-
-/* ═══════════════════════════════════
-   INIT — single entry point
-   ═══════════════════════════════════ */
-
-(function init() {
-  // Initialize slider
-  new Slider({
-    viewport:  document.getElementById('sliderViewport'),
-    track:     document.getElementById('sliderTrack'),
-    btnPrev:   document.getElementById('btnPrev'),
-    btnNext:   document.getElementById('btnNext'),
-    fillEl:    document.getElementById('sliderFill'),
-    currentEl: document.getElementById('sliderCurrent'),
-    totalEl:   document.getElementById('sliderTotal'),
-  });
-
-  // Initialize other modules
-  initReveal();
-  initSmoothNav();
-  initLightbox();
-  loadVimeoThumbnails();
-
-  // Stagger card shimmer animations
-  document.querySelectorAll('.video-placeholder').forEach((el, i) => {
-    el.style.setProperty('--card-delay', (i * 0.28) + 's');
-  });
-})();
+new Slider({
+  viewport: document.getElementById('sliderViewport'),
+  track: document.getElementById('sliderTrack'),
+  btnPrev: document.getElementById('btnPrev'),
+  btnNext: document.getElementById('btnNext'),
+  fillEl: document.getElementById('sliderFill'),
+  currentEl: document.getElementById('sliderCurrent'),
+  totalEl: document.getElementById('sliderTotal'),
+});
+initFeaturedWork();
+initReveal();
+initNavigation();
+initLightbox();
 </script>
 </body>
 </html>
